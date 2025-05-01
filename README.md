@@ -59,11 +59,13 @@ The model performance is visualized using confusion matrices and bar plots compa
 
 | Model         | Accuracy | Precision | Recall | F1-Score |
 |---------------|----------|-----------|--------|----------|
-| Decision Tree | XX%      | XX%       | XX%    | XX%      |
-| SVM           | XX%      | XX%       | XX%    | XX%      |
-| KNN           | XX%      | XX%       | XX%    | XX%      |
+| Decision Tree | 99.80%   | 99.79%    | 99.80% | 99.79%   |
+| KNN           | 99.57%   | ~99.60%   | ~99.60%| ~99.60%  |
+| SVM           | 97.98%   | 99.54%    | 97.98% | 98.62%   |
 
-> Replace `XX%` with actual evaluation results.
+- 🔹 **Decision Tree (DT)** outperformed all other models with near-perfect metrics, making it the most reliable choice.
+- 🔹 **KNN** closely followed DT, with high consistency in all metrics around 99.6%.
+- 🔹 **SVM** showed excellent precision and strong overall performance, balancing accuracy and recall well.
 
 ## 🔮 Future Work
 
