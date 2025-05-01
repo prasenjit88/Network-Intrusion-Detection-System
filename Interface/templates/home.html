@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - NIDS</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://kit.fontawesome.com/70db074e24.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <!-- <img src="{{ url_for('static', filename='images/nids logo.png') }}" alt="nids logo" class="logo"> -->
+         <h2 class="logo"><i class="fa-solid fa-hexagon-nodes-bolt"></i> NIDS </h2>
+        <div>
+            <i class="fa-solid fa-house"></i> <a href="{{ url_for('home') }}">Home</a>
+            <i class="fa-solid fa-layer-group"></i> <a href="{{ url_for('about') }}">About</a>
+            <i class="fa-solid fa-clipboard-list"></i> <a href="{{ url_for('models') }}">Models</a>
+        </div>
+    </div>
+
+    <!-- Home Content -->
+    <div class="container">
+        <div class="home-content">
+            <div class="home-box">
+                <h1 class="home-header">Network Intrusion Detection System (NIDS)</h1>
+        <p class="home-description">
+            A Network Intrusion Detection System (NIDS) is a security solution that monitors network traffic for malicious activities or policy violations. 
+            It analyzes network packets in real-time to detect potential threats like unauthorized access, malware, and attacks. NIDS uses signature-based or anomaly-based detection techniques to identify suspicious behavior. 
+            When a threat is detected, it generates alerts for administrators to take action. Common NIDS tools include Snort, Suricata, and Zeek. 
+        </p>
+        <a href="{{ url_for('models') }}" class="btn"><i class="fa-solid fa-clipboard-list"></i> Explore our models</a>
+        
+
+            </div>
+            <div class="home-box">
+        <img src="{{ url_for('static', filename='images/nids.png') }}" class="home-image" alt="NIDS Image">
+
+            </div>
+        </div>
+        
+        <h1 class="home-header" style="text-align: center; margin-top: 5rem;">History of NIDS</h1>
+        <img src="{{ url_for('static', filename='images/timeline.png') }}" class="history-img" alt="history">
+
+
+    </div>
+
+</body>
+</html>

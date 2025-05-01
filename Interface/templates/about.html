@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - NIDS</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://kit.fontawesome.com/70db074e24.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <!-- <img src="{{ url_for('static', filename='images/nids logo.png') }}" alt="nids logo" class="logo"> -->
+         <h2 class="logo"><i class="fa-solid fa-hexagon-nodes-bolt"></i> NIDS </h2>
+        <div>
+            <i class="fa-solid fa-house"></i> <a href="{{ url_for('home') }}">Home</a>
+            <i class="fa-solid fa-layer-group"></i> <a href="{{ url_for('about') }}">About</a>
+            <i class="fa-solid fa-clipboard-list"></i> <a href="{{ url_for('models') }}">Models</a>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="container">
+        <h1 class="home-header">Our Team</h1>
+
+        <div class="team-container">
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/member1.jpg') }}" alt="Member 1">
+                <h3>Hemalata A  (<b>Lead</b>)</h3>
+                <p>Roll No: 22A95A0502</p>
+            </div>
+
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="Member 2">
+                <h3>Kishore </h3>
+                <p>Roll No: 21A91A0580</p>
+            </div>
+
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="Member 3">
+                <h3> Sai Priya</h3>
+                <p>Roll No:21A91A0575</p>
+            </div>
+
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/member4.jpg') }}" alt="Member 4">
+                <h3>Prasenjit Jana</h3>
+                <p>Roll No:  21A91A0588 </p>
+            </div>
+        </div>
+
+        <h2 class="home-header">Project Guide</h2>
+        <div class="team-card">
+            <img src="{{ url_for('static', filename='images/guide.jpg') }}" alt="Guide">
+            <h3>APPARAJU G</h3>
+            <p>Designation: Assistant Professor</p>
+            <p>Degree: M.Tech (Ph.D)</p>
+        </div>
+    </div>
+
+</body>
+</html>

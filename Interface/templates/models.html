@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models - NIDS</title>
+ 
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://kit.fontawesome.com/70db074e24.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <!-- <img src="{{ url_for('static', filename='images/nids logo.png') }}" alt="nids logo" class="logo"> -->
+     <h2 class="logo"><i class="fa-solid fa-hexagon-nodes-bolt"></i> NIDS </h2>
+    <div>
+        <i class="fa-solid fa-house"></i> <a href="{{ url_for('home') }}">Home</a>
+        <i class="fa-solid fa-layer-group"></i> <a href="{{ url_for('about') }}">About</a>
+        <i class="fa-solid fa-clipboard-list"></i> <a href="{{ url_for('models') }}">Models</a>
+    </div>
+</div>
+
+  <header>
+    <h1 style="text-align: center;">Model Performance & Dataset Viewer</h1>
+  </header>
+
+  <!-- Metrics Section -->
+  <section class="metrics-section">
+    <h2>Model Performance Metrics</h2>
+    <label for="metric-select">Select Metric:</label>
+    <select id="metric-select">
+      <option value="accuracy" {% if metric == 'accuracy' %}selected{% endif %}>Accuracy</option>
+      <option value="precision" {% if metric == 'precision' %}selected{% endif %}>Precision</option>
+      <option value="recall" {% if metric == 'recall' %}selected{% endif %}>Recall</option>
+      <option value="f1-score" {% if metric == 'f1-score' %}selected{% endif %}>F1 Score</option>
+    </select>
+
+    <!-- Chart.js Canvas -->
+    <canvas id="metric-chart"></canvas>
+
+    
+
+  <!-- Dataset Viewer Section -->
+  <section class="dataset-section">
+    <h2>Dataset Viewer</h2>
+    <label for="dataset-select">Select Dataset:</label>
+    <select id="dataset-select">
+      <option value="KDDCUP99" {% if dataset == 'KDDCUP99' %}selected{% endif %}>KDDCUP99</option>
+      <option value="NSL-KDD" {% if dataset == 'NSL-KDD' %}selected{% endif %}>NSL-KDD</option>
+      <option value="CICIDS2017" {% if dataset == 'CICIDS2017' %}selected{% endif %}>CICIDS2017</option>
+    </select>
+    <div id="dataset-table">
+      <!-- Initially rendered table from Flask -->
+      {{ table | safe }}
+    </div>
+  </section>
+
+  <!-- JavaScript for updating charts and dataset table -->
+  <script>
+    // Model metrics data to be displayed in the Chart.js bar chart.
+    // These values should correspond to your backend metrics data.
+    const modelMetrics = {
+      'accuracy': [99.54, 97.98, 98.62],
+      'precision': [99.54, 97.98, 98.62],
+      'recall': [99.79, 99.80, 99.79],
+      'f1-score': [99.68, 99.57, 99.61]
+  };
+  const models = ['SVM', 'DT', 'KNN'];
+  
+  
+
+    // Initialize the Chart.js chart with the current metric data.
+    let ctx = document.getElementById('metric-chart').getContext('2d');
+    let metricChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: models,
+        datasets: [{
+          label: $('#metric-select option:selected').text(),
+          data: modelMetrics[$('#metric-select').val()],
+          backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Update the Chart.js chart when the metric selection changes.
+    $('#metric-select').change(function() {
+      let selectedMetric = $(this).val();
+      metricChart.data.datasets[0].label = $(this).find('option:selected').text();
+      metricChart.data.datasets[0].data = modelMetrics[selectedMetric];
+      metricChart.update();
+    });
+
+    // Update the dataset table via AJAX when the dataset selection changes.
+    $('#dataset-select').change(function() {
+      let selectedDataset = $(this).val();
+      $.get('/get_dataset', { name: selectedDataset }, function(data) {
+        $('#dataset-table').html(data);
+      });
+    });
+  </script>
+</body>
+</html>
